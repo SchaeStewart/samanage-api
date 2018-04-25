@@ -1,0 +1,15 @@
+{
+  "name": "samanage-api",
+  "version": "0.0.1",
+  "description": "A Module for interacting with the Samanage API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
