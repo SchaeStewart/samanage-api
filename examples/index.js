@@ -1,6 +1,6 @@
 #!/usr/bin/env
 
-const { Samanage, SamanageAPI } = require('../')
+const { Samanage } = require('../')
 require('dotenv').config()
 
 const RESOURCE = process.argv[2]
@@ -10,6 +10,7 @@ const RESOURCE = process.argv[2]
   try {
     switch (RESOURCE) {
       case 'users':
+        console.log(samanage)
         const users = await samanage.users.get({ per_page: 1 })
         console.log(users)
         break
