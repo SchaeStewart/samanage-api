@@ -73,9 +73,47 @@ class Samanage {
     create(resourceName, data) {
         return axios.post(`${resourceName}.json`, data);
     }
+
+    logError(msg) {
+        return (error) => {
+            // eslint-disable-next-line no-console
+            console.log(error, msg); 
+        };
+    }
+
+    users() {
+        // const get = (parameters = {}) => {
+        //     return this.get('users', parameters)
+        //         .catch(this.logError('failed to get user'));
+        // };
+
+        const get = this.get.apply('users');
+        
+        const create = (data) => {
+            return this.create('users', data)
+                .catch(this.logError('failed to create user'));
+        };
+
+        const remove = (id) => {
+            return this.delete('users', id)
+                .catch(this.logError('error deleting user'));
+        };
+
+        const update = this.update.apply('users');
+
+
+        return { get, create, remove, update };
+    }
 }
 
+// samanage.users.get(userId)
+// samanage.users().get(userId)
 
-module.exports = {
-    Samanage
-};
+
+// export get(params) {
+// 
+// }
+// export users.get() ..
+// 
+// 
+// handle api key initalizies

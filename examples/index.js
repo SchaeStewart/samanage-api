@@ -1,9 +1,11 @@
 #!/usr/bin/env
 
-const { Samanage } = require('../')
+const { Samanage } = require('../dist/')
 require('dotenv').config()
 
 const RESOURCE = process.argv[2]
+
+console.log(Samanage);
 
 ;(async () => {
   const samanage = new Samanage(process.env.APIKEY)
@@ -11,7 +13,7 @@ const RESOURCE = process.argv[2]
     switch (RESOURCE) {
       case 'users':
         console.log(samanage)
-        const users = await samanage.users.get({ per_page: 1 })
+        const users = await samanage.users().get({ per_page: 1 })
         console.log(users)
         break
       case 'audit':
