@@ -49,7 +49,7 @@ class Samanage {
      * @param {object} data - An object containing the fields to be update. EX { user: { email: 'NewEmail@domain.com' } }
      * @returns {Promise}
      */
-    put(resourceName, id, data) {
+    update(resourceName, id, data) {
         return axios.put(`/${resourceName}/${id}.${this.contentType}`, data);
     }
 
@@ -82,38 +82,11 @@ class Samanage {
     }
 
     users() {
-        // const get = (parameters = {}) => {
-        //     return this.get('users', parameters)
-        //         .catch(this.logError('failed to get user'));
-        // };
-
-        const get = this.get.apply('users');
-        
-        const create = (data) => {
-            return this.create('users', data)
-                .catch(this.logError('failed to create user'));
+        return {
+            create: this.create.bind(this, 'users'),
+            get: this.get.bind(this, 'users'),
+            update: this.update.bind(this, 'users'),
+            delete: this.delete.bind(this, 'users'),
         };
-
-        const remove = (id) => {
-            return this.delete('users', id)
-                .catch(this.logError('error deleting user'));
-        };
-
-        const update = this.update.apply('users');
-
-
-        return { get, create, remove, update };
     }
 }
-
-// samanage.users.get(userId)
-// samanage.users().get(userId)
-
-
-// export get(params) {
-// 
-// }
-// export users.get() ..
-// 
-// 
-// handle api key initalizies

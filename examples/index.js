@@ -1,14 +1,13 @@
 #!/usr/bin/env
 
 const { Samanage } = require('../dist/')
-require('dotenv').config()
 
 const RESOURCE = process.argv[2]
 
 console.log(Samanage);
 
 ;(async () => {
-  const samanage = new Samanage(process.env.APIKEY)
+  const samanage = new Samanage(process.env.SAMANAGE_KEY)
   try {
     switch (RESOURCE) {
       case 'users':

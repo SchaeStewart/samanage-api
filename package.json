@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "description": "A Module for interacting with the Samanage API",
   "main": "index.js",
-  "scripts": {
-    "build": "babel src -d lib"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,8 +11,6 @@
     "babel-preset-env": "^1.7.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "eslint": "^4.19.1"
   }
 }
