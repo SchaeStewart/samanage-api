@@ -4,6 +4,20 @@ A (currently thin) class for interacting with the Samanage API
 
 ## Usage
 
+###
+Get By ID
+
+``` ecmascript 6
+const hardware = (await samanage.get('hardwares', { id: '000001' })).res.data
+
+// Pass in other params
+const hardware = (await samanage.get('hardwares', { id: '000001', { name: 'user-desktop' } })).res.data
+
+const user = (await samanage.users().get({ id: '000001', { name: 'user-desktop' } })).res.data
+```
+
+*NOTE* The nested object when passing in additional params
+
 ### Search or Get
 ``` ecmascript 6
 
