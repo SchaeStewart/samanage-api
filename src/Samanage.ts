@@ -2,19 +2,51 @@
 
 import axios, { AxiosPromise } from 'axios';
 
-interface Parameters { [key: string]: string }
-
-interface RestMethods {
-    get: Function;
-    create: Function;
-    update: Function;
-    delete: Function;
+interface Parameters {
+    [key: string]: string;
+}
+/**
+ * An interface with the REST methods for interacting with the Samanage API
+ *
+ * @interface ResourceMethods
+ */
+interface ResourceMethods {
+    /**
+     * Get the specified endpoint
+     * @param {Parameters} parameters - An object containing query parameters and or an id.
+     *   If an id is present, it will be added to the resource URI. EG /hardwares/${ID}.json?param1=value
+     * @returns {AxiosPromise}
+     * @memberof EndpointOperations
+     */
+    get?(parameters: Parameters): AxiosPromise;
+    /**
+     * Create a new resource
+     * @param {object} data - An object with the information of your new item
+     * @returns {AxiosPromise}
+     * @memberof EndpointOperations
+     */
+    create?(data: object): AxiosPromise;
+    /**
+     * Update the specified resource
+     * @param {string} id - The id of the reosource to update
+     * @param {object} data - The data for the updated resource
+     * @returns {AxiosPromise}
+     * @memberof EndpointOperations
+     */
+    update?(id: string, data: object): AxiosPromise;
+    /**
+     * Delete the specified resource
+     * @param {string} id - The id of the reosource to update
+     * @returns {AxiosPromise}
+     * @memberof EndpointOperations
+     */
+    delete?(id: string): AxiosPromise;
 }
 
 /** Class for interacting with the Samanage API*/
 export class Samanage {
     /**
-     *
+     * @constructor
      * @param {string} key - Samanage API Key
      * @param {string} [version=2.1]- Samanage API version
      * @param {string} [contentType=json] - JSON or XML
@@ -88,36 +120,42 @@ export class Samanage {
         return axios.post(`${resourceName}.json`, data);
     };
 
-    logError(msg: string) {
+    /**
+     * Returns a function that logs the error followed by your message
+     * @private
+     * @param {string} msg - The message to dispaly with the error
+     * @returns {function(string)}
+     * @memberof Samanage
+     */
+    private logError(msg: string) {
         return (error: string) => {
             // eslint-disable-next-line no-console
             console.log(error, msg);
         };
     };
 
-
-    attachments = {
+    attachments: ResourceMethods = {
         create: this.create.bind(this, 'attachments'),
     };
 
-    audit = {
+    audit: ResourceMethods = {
         get: this.get.bind(this, 'audits')
     };
 
-    catalogItems = {
+    catalogItems: ResourceMethods = {
         create: this.create.bind(this, 'catalog_items'),
         get: this.get.bind(this, 'catalog_items'),
         update: this.update.bind(this, 'catalog_items'),
     };
 
-    categories = {
+    categories: ResourceMethods = {
         create: this.create.bind(this, 'categories'),
         get: this.get.bind(this, 'categories'),
         update: this.update.bind(this, 'categories'),
         delete: this.delete.bind(this, 'categories')
     };
 
-    changes = {
+    changes: ResourceMethods = {
         create: this.create.bind(this, 'changes'),
         get: this.get.bind(this, 'changes'),
         update: this.update.bind(this, 'changes'),
@@ -128,7 +166,7 @@ export class Samanage {
         throw 'error, feature not implemented';
     };
 
-    configurationItems = {
+    configurationItems: ResourceMethods = {
         create: this.create.bind(this, 'configuration_items'),
         get: this.get.bind(this, 'configuration_items'),
         update: this.update.bind(this, 'configuration_items'),
@@ -136,36 +174,35 @@ export class Samanage {
     };
 
 
-    contracts = {
+    contracts: ResourceMethods = {
         create: this.create.bind(this, 'contracts'),
         get: this.get.bind(this, 'contracts'),
         update: this.update.bind(this, 'contracts'),
         delete: () => { throw 'delete is not a function for contracts'; }
     };
 
-    departments = {
+    departments: ResourceMethods = {
         create: this.create.bind(this, 'departments'),
         get: this.get.bind(this, 'departments'),
         update: this.update.bind(this, 'departments'),
         delete: this.delete.bind(this, 'departments')
     };
 
-    groups = {
+    groups: ResourceMethods = {
         create: this.create.bind(this, 'groups'),
         get: this.get.bind(this, 'groups'),
         update: this.update.bind(this, 'groups'),
         delete: this.delete.bind(this, 'groups')
     };
 
-    hardware = {
+    hardware: ResourceMethods = {
         create: this.create.bind(this, 'hardwares'),
         get: this.get.bind(this, 'hardwares'),
         update: this.update.bind(this, 'hardwares'),
         delete: this.delete.bind(this, 'hardwares')
     }
 
-
-    incidents = {
+    incidents: ResourceMethods = {
         create: this.create.bind(this, 'incidents'),
         get: this.get.bind(this, 'incidents'),
         update: this.update.bind(this, 'incidents'),
@@ -176,32 +213,32 @@ export class Samanage {
         throw 'error feature not implemented';
     }
 
-    memberships = {
+    memberships: ResourceMethods = {
         create: this.create.bind(this, 'memberships'),
         get: this.get.bind(this, 'memberships'),
         update: this.update.bind(this, 'memberships'),
         delete: this.delete.bind(this, 'memberships')
     }
 
-    mobiles = {
+    mobiles: ResourceMethods = {
         create: this.create.bind(this, 'mobiles'),
         get: this.get.bind(this, 'mobiles'),
         update: this.update.bind(this, 'mobiles'),
         delete: this.delete.bind(this, 'mobiles')
     }
 
-    otherAssets = {
+    otherAssets: ResourceMethods = {
         create: this.create.bind(this, 'other_assets'),
         get: this.get.bind(this, 'other_assets'),
         update: this.update.bind(this, 'other_assets'),
         delete: this.delete.bind(this, 'other_assets')
     }
 
-    printers = {
+    printers: ResourceMethods = {
         get: this.get.bind(this, 'printers'),
     }
 
-    problems = {
+    problems: ResourceMethods = {
         create: this.create.bind(this, 'problems'),
         get: this.get.bind(this, 'problems'),
         update: this.update.bind(this, 'problems'),
@@ -212,26 +249,26 @@ export class Samanage {
         throw 'error purchaes not implemented';
     };
 
-    purchaseOrders = {
+    purchaseOrders: ResourceMethods = {
         create: this.create.bind(this, 'purchase_orders'),
         get: this.get.bind(this, 'purchase_orders'),
         update: this.update.bind(this, 'purchase_orders'),
         delete: this.delete.bind(this, 'purchase_orders')
     };
 
-    releases = {
+    releases: ResourceMethods = {
         create: this.create.bind(this, 'releases'),
         get: this.get.bind(this, 'releases'),
         update: this.update.bind(this, 'releases'),
         delete: this.delete.bind(this, 'releases')
     };
 
-    risks = {
+    risks: ResourceMethods = {
         get: this.get.bind(this, 'risks'),
-        getForHardware: (hardwareId: string) => this.get(`hardwares/${hardwareId}/risks.${this.contentType}`)
+        // getForHardware: (hardwareId: string) => this.get(`hardwares/${hardwareId}/risks.${this.contentType}`)
     };
 
-    roles = {
+    roles: ResourceMethods = {
         create: this.create.bind(this, 'role'),
         get: this.get.bind(this, 'role'),
     };
@@ -240,18 +277,18 @@ export class Samanage {
         throw 'error feature not implemented';
     };
 
-    sites = {
+    sites: ResourceMethods = {
         create: this.create.bind(this, 'sites'),
         get: this.get.bind(this, 'sites'),
         update: this.update.bind(this, 'sites'),
         delete: this.delete.bind(this, 'sites'),
     };
 
-    software = {
+    software: ResourceMethods = {
         get: this.get.bind(this, 'softwares'),
     };
 
-    solutions = {
+    solutions: ResourceMethods = {
         create: this.create.bind(this, 'solutions'),
         get: this.get.bind(this, 'solutions'),
         update: this.update.bind(this, 'solutions'),
@@ -266,30 +303,18 @@ export class Samanage {
         throw 'error feature not implemented';
     };
 
-    users = {
+    users: ResourceMethods = {
         create: this.create.bind(this, 'users'),
         get: this.get.bind(this, 'users'),
         update: this.update.bind(this, 'users'),
         delete: this.delete.bind(this, 'users'),
     };
 
-    vendor = {
+    vendor: ResourceMethods = {
         get: this.get.bind(this, 'vendors')
     };
 
     warranties = () => {
         throw 'error feature not implemented';
     };
-
-    test() {
-        console.log('hello world')
-    }
-
 }
-
-// const api = new Samanage(process.env.SAMANAGE_KEY);
-// api.hardware.get()
-//     .then(res => console.log(res.data))
-//     .catch((error) => console.log(error, 'error'));
-// const api = new Samanage('helloworld')
-// console.log(api.hardware.get());
