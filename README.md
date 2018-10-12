@@ -36,5 +36,13 @@ console.log(user)
 ```
 
 ## TODO:
-- Provide functions for specific endpoints.
-- Finish writing examples
+- Examples
+  - Note: http://usejsdoc.org/about-tutorials.html#adding-tutorials
+- Tests
+- Parameter validiation
+  - Create interface with the allowed fields for each resource
+  - Allow override
+- Publish to NPM
+  - https://docs.npmjs.com/getting-started/publishing-npm-packages
+- Travis/CI
+  - https://docs.travis-ci.com/user/deployment/npm/
