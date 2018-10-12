@@ -12,7 +12,7 @@ interface RestMethods {
 }
 
 /** Class for interacting with the Samanage API*/
-class Samanage {
+export class Samanage {
     /**
      *
      * @param {string} key - Samanage API Key
@@ -280,11 +280,16 @@ class Samanage {
     warranties = () => {
         throw 'error feature not implemented';
     };
+
+    test() {
+        console.log('hello world')
+    }
+
 }
 
 // const api = new Samanage(process.env.SAMANAGE_KEY);
 // api.hardware.get()
 //     .then(res => console.log(res.data))
 //     .catch((error) => console.log(error, 'error'));
-const api = new Samanage('helloworld')
-console.log(api.hardware.get());
+// const api = new Samanage('helloworld')
+// console.log(api.hardware.get());
