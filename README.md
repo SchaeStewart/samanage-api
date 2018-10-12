@@ -16,8 +16,6 @@ const hardware = (await samanage.get('hardwares', { id: '000001', { name: 'user-
 const user = (await samanage.users().get({ id: '000001', { name: 'user-desktop' } })).res.data
 ```
 
-*NOTE* The nested object when passing in additional params
-
 ### Search or Get
 ``` ecmascript 6
 
@@ -39,6 +37,7 @@ console.log(user)
 - Examples
   - Note: http://usejsdoc.org/about-tutorials.html#adding-tutorials
 - Tests
+- TSC to githooks
 - Parameter validiation
   - Create interface with the allowed fields for each resource
   - Allow override
