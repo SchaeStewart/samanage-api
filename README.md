@@ -1,6 +1,6 @@
 # Samnage-API
 
-A (currently thin) class for interacting with the Samanage API
+A class for interacting with the Samanage API
 
 ## Usage
 
@@ -37,7 +37,7 @@ console.log(user)
 - Examples
   - Note: http://usejsdoc.org/about-tutorials.html#adding-tutorials
 - Tests
-- Add axios as a property of Samanage class
+- Add axios as a property of Samanage class - https://github.com/axios/axios#custom-instance-defaults
 - TSC to githooks
 - Parameter validiation
   - Create interface with the allowed fields for each resource

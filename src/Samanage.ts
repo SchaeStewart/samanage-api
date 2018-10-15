@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import axios, { AxiosPromise } from 'axios';
+import axios, { AxiosPromise, AxiosInstance } from 'axios';
 
 interface Parameters {
     [key: string]: string;
@@ -52,12 +52,15 @@ export class Samanage {
      * @param {string} [contentType=json] - JSON or XML
      */
     contentType: string;
+    axios: AxiosInstance;
     constructor(key: string, version = '2.1', contentType = 'json') {
         if (!key || typeof key !== 'string') throw 'An API Key is required';
-        axios.defaults.baseURL = 'https://api.samanage.com';
-        axios.defaults.headers.common['X-Samanage-Authorization'] = `Bearer ${key}`;
-        axios.defaults.headers.common['Accept'] = `application/vnd.samanage.v${version}+${contentType}`;
-        axios.defaults.headers.common['Content-Type'] = `application/${contentType}`;
+        this.axios = axios.create({
+            baseURL: 'https://api.samanage.com',
+        })
+        this.axios.defaults.headers.common['X-Samanage-Authorization'] = `Bearer ${key}`;
+        this.axios.defaults.headers.common['Accept'] = `application/vnd.samanage.v${version}+${contentType}`;
+        this.axios.defaults.headers.common['Content-Type'] = `application/${contentType}`;
         this.contentType = contentType;
 
     }
@@ -85,7 +88,9 @@ export class Samanage {
             id = parameters.id
             delete parameters.id
         }
-        return axios.get(`/ ${resourceName} ${id ? '/' + id : ''}.${this.contentType} ${this.createQueryString(parameters)} `);
+        console.log(parameters, 'params')
+        console.log(id, 'id')
+        return this.axios.get(`/${resourceName}${id ? '/' + id : ''}.${this.contentType}${this.createQueryString(parameters)} `);
     };
 
     /**
@@ -96,7 +101,7 @@ export class Samanage {
      * @returns {Promise}
      */
     update(resourceName: string, id: string, data: object) {
-        return axios.put(`/ ${resourceName} /${id}.${this.contentType}`, data);
+        return this.axios.put(`/${resourceName}/${id}.${this.contentType}`, data);
     };
 
     /**
@@ -107,7 +112,7 @@ export class Samanage {
      * @returns {Promise}
      */
     delete(resourceName: string, id: string) {
-        return axios.delete(`/${resourceName}/${id}.${this.contentType}`);
+        return this.axios.delete(`/${resourceName}/${id}.${this.contentType}`);
     };
 
     /**
@@ -117,7 +122,7 @@ export class Samanage {
      * @returns {Promise}
      */
     create(resourceName: string, data: object) {
-        return axios.post(`${resourceName}.json`, data);
+        return this.axios.post(`${resourceName}.json`, data);
     };
 
     /**
