@@ -3,7 +3,11 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    // "extends": "eslint:recommended",
+    "parser": "typescript-eslint-parser",
+    "plugins": [
+        "typescript"
+    ],
     "parserOptions": {
         "sourceType": "module"
     },
@@ -23,6 +27,12 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "typescript/class-name-casing": "error",
+        "typescript/explicit-function-return-type": [ "error", { "allowExpressions": true }],
+        "typescript/member-delimiter-style": ["error", {
+            "delimiter": "comma", "requireLast": true
+        }],
+        "typescript/no-unused-vars": "error" 
     }
 };
