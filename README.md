@@ -37,8 +37,7 @@ console.log(user)
 - Examples
   - Note: http://usejsdoc.org/about-tutorials.html#adding-tutorials
 - Tests
-- Add axios as a property of Samanage class - https://github.com/axios/axios#custom-instance-defaults
-- TSC to githooks
+- Prettier
 - Parameter validiation
   - Create interface with the allowed fields for each resource
   - Allow override
