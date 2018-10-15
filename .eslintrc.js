@@ -3,29 +3,27 @@ module.exports = {
     es6: true,
     node: true
   },
-  extends: ["prettier"],
-  parser: "typescript-eslint-parser",
-  plugins: ["typescript"],
+  extends: ['prettier'],
+  parser: 'typescript-eslint-parser',
+  plugins: ['typescript'],
   parserOptions: {
-    sourceType: "module"
+    sourceType: 'module'
   },
   rules: {
-    indent: ["error", 4],
-    "linebreak-style": ["error", "unix"],
-    quotes: ["error", "single"],
-    semi: ["error", "always"],
-    "typescript/class-name-casing": "error",
-    "typescript/explicit-function-return-type": [
-      "error",
+    indent: ['error', 4],
+    'linebreak-style': ['error', 'unix'],
+    'typescript/class-name-casing': 'error',
+    'typescript/explicit-function-return-type': [
+      'error',
       { allowExpressions: true }
     ],
-    "typescript/member-delimiter-style": [
-      "error",
+    'typescript/member-delimiter-style': [
+      'error',
       {
-        delimiter: "comma",
+        delimiter: 'comma',
         requireLast: true
       }
     ],
-    "typescript/no-unused-vars": "error"
+    'typescript/no-unused-vars': 'error'
   }
-};
+}
